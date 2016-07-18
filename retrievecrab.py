@@ -9,7 +9,7 @@
 
 import sys
 import optparse
-import src.crablogger ## Loading custom package
+import src.crablogger as cl ## Loading custom package
 
 def retrievecrab(argv=sys.argv):
     parser = optparse.OptionParser("Options for retrieving crab file")
@@ -27,7 +27,7 @@ def retrievecrab(argv=sys.argv):
         parser.print_help()
         return 1
 
-    logger = crablogger.CrabLogger( opt.site, opt.dirfln, opt.primary, opt.crabjob, opt.output )
+    logger = cl.CrabLogger( opt.site, opt.dirfln, opt.primary, opt.crabjob, opt.output )
 
     logger.getoutput(opt.refresh)
 

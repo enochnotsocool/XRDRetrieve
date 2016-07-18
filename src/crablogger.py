@@ -129,9 +129,10 @@ class CrabLogger(object):
                 filelist.append( remotepath )
             else:
                 remotesize = pair[1]
-                localsize  = os.path.getsize(localpath)
+                localsize  = str(os.path.getsize(localpath))
                 if localsize != remotesize:
-                    print "Adding mismatch file ", os.path.basename(remotepath)
+                    print "Adding mismatch file ", os.path.basename(remotepath),
+                    print "(local:{}/remote:{})".format( localsize , remotesize )
                     filelist.append( remotepath )
         return filelist
 
@@ -171,7 +172,7 @@ class CrabLogger(object):
             self.output,
             os.path.basename(remotepath)
         )
-
+        print "Retrieving file ", os.path.basename(remotepath)
         os.system(cmd)
 
 

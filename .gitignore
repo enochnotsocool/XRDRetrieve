@@ -12,7 +12,6 @@
 *.txt
 *.root
 *.log
-log*
 
 # Specific file exclusion
 # [relative/path/to/file]
