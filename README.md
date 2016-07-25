@@ -15,7 +15,7 @@ In the case the file retrieval process fails, of if there is a update from a re-
 ### Requirements
 
 * [python 2.7](https://www.python.org/download/releases/2.7/)
-* [`xrdfs`](http://xrootd.org/doc/man/xrdfs.1.html) command line utilities
+* [`xrdfs 4.3`](http://xrootd.org/doc/man/xrdfs.1.html) command line utilities
 
 
 ### Design mentalities
