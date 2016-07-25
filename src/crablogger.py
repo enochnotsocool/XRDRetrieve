@@ -13,13 +13,14 @@ from   datetime import datetime
 import time
 
 class CrabLogger(object):
+
     def __init__(self, site, dirfln, primary, crabjob, output):
-        self.site      = site
-        self.dirfln    = dirfln
-        self.primary   = primary
-        self.crabjob   = crabjob
-        self.output    = output + '/' + crabjob
-        self.timestamp = None
+        self.site        = site
+        self.dirfln      = dirfln
+        self.primary     = primary
+        self.crabjob     = crabjob
+        self.output      = output + '/' + crabjob
+        self.timestamp   = None
         self.localtable  = logformat.LogTable()
         self.remotetable = None
 
@@ -173,6 +174,7 @@ class CrabLogger(object):
             os.path.basename(remotepath)
         )
         print "Retrieving file ", os.path.basename(remotepath)
+        print cmd
         os.system(cmd)
 
 
