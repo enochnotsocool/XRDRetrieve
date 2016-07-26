@@ -25,13 +25,16 @@ class CrabLogger(object):
         self.remotetable = None
 
         ## Testing if crab
+        print ">> Begin Initizalizing..."
         if not self.checkremotedir():
             raise Exception('requested crab job path not found at remote location')
 
         if not self.checklocaldir():
             raise Exception('Error in specifying output!')
+        print ">> Finished Initizalizing!"
 
     def getoutput(self, compare_with_remote=False):
+        print ">> Starting comparing...."
         retrievelist = []
 
         if os.path.isfile( self.logfilename() ):
@@ -47,9 +50,14 @@ class CrabLogger(object):
             self.localtable.write( self.logfilename() )
 
         retrievelist.extend( self.compare_local()  )
-        retrievelist = set( retrievelist ) ## Unique elements only
+        retrievelist = sorted(set( retrievelist )) ## Unique elements only
+
+        if len(retrievelist) == 0 :
+            print ">> Everything done! Nothing to retrieve!"
+            return
 
         for remotefile in retrievelist:
+            print ">> Start retrieving...."
             self.retrievesingle(remotefile)
 
 
@@ -97,6 +105,8 @@ class CrabLogger(object):
         proc = subprocess.Popen(["xrdfs", self.site, "ls", query ], stdout=subprocess.PIPE, stderr=subprocess.PIPE )
         out, err = proc.communicate()
         if err :
+            print "Error detected when calling xrdfs!"
+            print "Have you setup your permission? (voms-proxy-init -voms cms -valid 192:0)"
             raise Exception("Error in input!")
         return out.split()
 

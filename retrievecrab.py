@@ -10,8 +10,13 @@
 import sys
 import optparse
 import src.crablogger as cl ## Loading custom package
+import src.versioncheck as vc
 
 def retrievecrab(argv=sys.argv):
+
+    ## Run version check before anything
+    vc.CheckVersionReq()
+
     parser = optparse.OptionParser("Options for retrieving crab file")
     parser.add_option("-s","--site"   , dest="site"   , help="Site of where the output is stored",                      type='string' )
     parser.add_option("-d","--dirfln" , dest="dirfln" , help="The path specified in the crab config file",              type='string' )

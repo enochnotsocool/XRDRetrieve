@@ -15,7 +15,9 @@ In the case the file retrieval process fails, of if there is a update from a re-
 ### Requirements
 
 * [python 2.7](https://www.python.org/download/releases/2.7/)
-* [`xrdfs 4.3`](http://xrootd.org/doc/man/xrdfs.1.html) command line utilities
+* [`xrdfs 4.2`](http://xrootd.org/doc/man/xrdfs.1.html) command line utilities
+
+Please note that any xrdfs commands should be able to run without user-interaction. If you need to setup certificate proxies, please do it before running the scripts.
 
 
 ### Design mentalities
