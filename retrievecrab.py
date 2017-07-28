@@ -8,7 +8,7 @@
 #*******************************************************************************
 
 import sys
-import optparse
+import argparse
 import src.crablogger as cl ## Loading custom package
 import src.versioncheck as vc
 
@@ -17,28 +17,37 @@ def retrievecrab(argv=sys.argv):
     ## Run version check before anything
     vc.CheckVersionReq()
 
-    parser = optparse.OptionParser("Options for retrieving crab file")
-    parser.add_option("-s","--site"   , dest="site"   , help="Site of where the output is stored",                      type='string' )
-    parser.add_option("-d","--dirfln" , dest="dirfln" , help="The path specified in the crab config file",              type='string' )
-    parser.add_option("-p","--primary", dest="primary", help="Name of the primary dataset (first entry in DAS query)",  type='string' )
-    parser.add_option("-c","--crabjob", dest="crabjob", help="Name of crab jobs as defined in crab configuration file", type='string' )
-    parser.add_option("-o","--output" , dest="output" , help="Output directory, defaulted to be the this directory",    type='string', default="./" )
-    parser.add_option("-r","--refresh", dest="refresh", help="Generate new log file", action="store_true" )
+    parser = argparse.ArgumentParser("Options for retrieving crab file")
+    parser.add_argument("-s","--site"   ,
+        help="Site of where the output is stored",
+        type=str, default='eoscms.cern.ch', )
+    parser.add_argument("-d","--dirfln" ,
+        help="The path specified in the crab config file",
+        type=str, required=True)
+    parser.add_argument("-p","--primary",
+        help="Name of the primary dataset (first entry in DAS query)",
+        type=str, required=True)
+    parser.add_argument("-c","--crabjob",
+        help="Name of crab jobs as defined in crab configuration file",
+        type=str, required=True)
+    parser.add_argument("-o","--output" ,
+        help="Output directory, default to be present working directory",
+        type=str, default="./", )
+    parser.add_argument("-r","--refresh",
+        help="Generate new log file",
+        action="store_true", )
 
-    opt, args = parser.parse_args( argv )
-
-    if not opt.site or not opt.dirfln or not opt.primary or not opt.crabjob:
-        print "Error! Option is not specified!\n"
+    try:
+        arg = parser.parse_args( argv[1:] )
+    except:
         parser.print_help()
-        return 1
+        raise
 
-    logger = cl.CrabLogger( opt.site, opt.dirfln, opt.primary, opt.crabjob, opt.output )
+    logger = cl.CrabLogger( arg.site, arg.dirfln, arg.primary, arg.crabjob, arg.output )
 
     logger.getoutput(opt.refresh)
 
     return 0
-
-
 
 
 if __name__ == "__main__":

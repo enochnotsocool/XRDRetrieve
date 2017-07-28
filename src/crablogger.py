@@ -107,6 +107,7 @@ class CrabLogger(object):
         if err :
             print "Error detected when calling xrdfs!"
             print "Have you setup your permission? (voms-proxy-init -voms cms -valid 192:0)"
+            print "Full command >> xrdfs", self.site, "ls", query
             raise Exception("Error in input!")
         return out.split()
 

@@ -49,7 +49,7 @@ def CheckVersionReq():
         print "You xrdfs is too old!", xrdversion
         print requirements
         raise Exception("Version Error")
-    
+
 
 
 if __name__ == "__main__" :
