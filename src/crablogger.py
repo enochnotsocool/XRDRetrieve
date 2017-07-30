@@ -102,6 +102,7 @@ class CrabLogger(object):
 
     def listremote(self,query):
         """Using xrdfs ls"""
+        print query
         proc = subprocess.Popen(["xrdfs", self.site, "ls", query ], stdout=subprocess.PIPE, stderr=subprocess.PIPE )
         out, err = proc.communicate()
         if err :

@@ -45,7 +45,7 @@ def retrievecrab(argv=sys.argv):
 
     logger = cl.CrabLogger( arg.site, arg.dirfln, arg.primary, arg.crabjob, arg.output )
 
-    logger.getoutput(opt.refresh)
+    logger.getoutput(arg.refresh)
 
     return 0
 
